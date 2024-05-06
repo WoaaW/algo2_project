@@ -5,10 +5,10 @@ public class OptimisationAlg {
 
     private static int max = 0;
     
-    static void exhaustion(ArrayList<Lamp> lamps, int switchesNo){
+    static void exhaustion(ArrayList<Lamp> lamps){
 
         int index = 0;
-        int[] horizontalSwitches = new int[switchesNo];
+        int[] horizontalSwitches = new int[Utils.findSwitchesNbr(lamps)];
         Arrays.fill(horizontalSwitches, 0);
 
         _exhaustion(lamps, horizontalSwitches, index);
