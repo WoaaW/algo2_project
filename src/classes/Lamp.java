@@ -1,8 +1,24 @@
-public class Lamp {
-    int[] _values;
-    int[] _coord = new int[2];
-    int[] _switches = new int[4];
+/*
+Projet Algorithmique 2 - FIAT LUX
 
+Auteurs : Maucq Thibault (000 47 49 22) et Van Sint Jan Kolya (000 57 37 39)
+
+Description : Fichier Lamp du projet. Ce fichier contient la class Lamp, qui représente les ampoule. Un objet Lamp sera donc crée
+              pour chaque ampoule présente sur le grille.
+
+Date : 6 mai 2024.
+*/
+
+public class Lamp {
+    int[] _values;  // Correspond aux entiers reprenant toutes les informations de l'ampoule sous le format "l c x y z t".
+    int[] _coord = new int[2];  // Correspond à la ligne et colonne de l'ampoule.
+    int[] _switches = new int[4];   // Correspond aux bits indiquant si l'ampoule s'allume pour chacune des 4 combinaisons possibles des interrupteurs.
+
+    /**
+     * Constructeur de Lamp. 
+     * 
+     * @param values Correspond aux entiers reprenant toutes les informations de l'ampoule sous le format "l c x y z t".
+     **/
     public Lamp(int[] values){
         _values = values;
         for (int i = 0; i <= 1; i++){

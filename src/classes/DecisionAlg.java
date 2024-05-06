@@ -1,12 +1,29 @@
+/*
+Projet Algorithmique 2 - FIAT LUX
+
+Auteurs : Maucq Thibault (000 47 49 22) et Van Sint Jan Kolya (000 57 37 39)
+
+Description : Fichier DecisionAlg du projet. Contient les méthodes de l'algorithme de décision pour déterminer si  
+              toutes les ampoules peuvent être allumées simultanéments dans une certaine grille donnée.
+
+Date : 6 mai 2024.
+*/
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DecisionAlg {
 
-    public static boolean finished = false;
+    public static boolean finished = false; // Bool permettant de savoir si la recherche de la solution est finie ou non.
     
+    /** 
+     * Initialise les variables utiles pour l'algorithme pour appelle l'exécute. Imprime dans le terminale le résultat une 
+     * fois l'algorithme terminé.
+     * 
+     * @param lamps array contenant des objets Lamp.
+     * @return void.
+     */
     static void exhaustion(ArrayList<Lamp> lamps){
-
         int index = 0;
         int[] horizontalSwitches = new int[Utils.findSwitchesNbr(lamps)];
         Arrays.fill(horizontalSwitches, 0);
@@ -23,6 +40,16 @@ public class DecisionAlg {
         return;
     }
 
+    /** 
+     * Cette méthode va faire des appels récusifs (backtracking) pour trouver si toutes ampoules peuvent être allumées simultanément.
+     * Une fois que l'index est égal au nombre d'interrupteurs, la méthode checkLamp est appelée pour savoir si toutes les lumières sont allumées
+     * pour la combinaison d'interrupteurs obtenu. Si c'est le cas la variable finished est mise à true et on termine tous les appels récursifs.
+     * 
+     * @param lamps array contenant des objets Lamp.
+     * @param horizontalSwitches liste contenant l'état (0 ou 1) de tous les interrupteurs de la grille. Première moitié les interrupteurs des lignes, deuxième moitié des colonnes.
+     * @param index index permettant d'accéder à un interrupteur dans horizontalSwitches.
+     * @return void.
+     */
     static void _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
         if (finished == true) {
             return;
@@ -42,9 +69,16 @@ public class DecisionAlg {
         return;
     }
 
-
+    /** 
+     * Cette méthode permet de vérifier si pour une certaine combinaison des interrupteurs, l'ampoule sera allumée ou pas.
+     * On boucle donc sur toutes les ampoules de la grille et si une des ampoules ne s'allume pas, on renvoie false directement.
+     * 
+     * @param lamps array contenant des objets Lamp.
+     * @param horizontalSwitches liste contenant l'état (0 ou 1) de tous les interrupteurs de la grille. Première moitié les interrupteurs des lignes, deuxième moitié des colonnes.
+     * @return boolean pour savoir si toutes les lampes peuvent être allumées simultanément ou non.
+     */
     private static boolean checkLamp(ArrayList<Lamp> lamps, int[] horizontalSwitches){
-        boolean  lampState = false;
+        boolean  lampState = false; // État de l'ampoule. (false == éteinte, true == allumée)
         int length = horizontalSwitches.length;
 
         for(Lamp l : lamps){
