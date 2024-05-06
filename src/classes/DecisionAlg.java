@@ -46,9 +46,8 @@ public class DecisionAlg {
      * @return void.
      */
     static boolean _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
-        if (index == horizontalSwitches.length){
+        if (index == horizontalSwitches.length)
             return checkLamp(lamps, horizontalSwitches); 
-        }
         
         horizontalSwitches[index] = 1;
         if (_exhaustion(lamps, horizontalSwitches, index + 1))
