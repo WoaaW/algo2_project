@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DecisionAlg {
-
-    public static boolean finished = false; // Bool permettant de savoir si la recherche de la solution est finie ou non.
     
     /** 
      * Initialise les variables utiles pour l'algorithme pour appelle l'exécute. Imprime dans le terminale le résultat une 
@@ -28,15 +26,12 @@ public class DecisionAlg {
         int[] horizontalSwitches = new int[Utils.findSwitchesNbr(lamps)];
         Arrays.fill(horizontalSwitches, 0);
 
-        _exhaustion(lamps, horizontalSwitches, index);
-
-        if (finished){
+        if (_exhaustion(lamps, horizontalSwitches, index)){
             System.out.println("There is a solution !");
         }
         else {
             System.out.println("No solution found.");
         }
-
         return;
     }
 
@@ -50,23 +45,20 @@ public class DecisionAlg {
      * @param index index permettant d'accéder à un interrupteur dans horizontalSwitches.
      * @return void.
      */
-    static void _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
-        if (finished == true) {
-            return;
-        }
+    static boolean _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
         if (index == horizontalSwitches.length){
-            if (checkLamp(lamps, horizontalSwitches)){ 
-                finished = true;
-            }
-            return;
+            return checkLamp(lamps, horizontalSwitches); 
         }
+        
         horizontalSwitches[index] = 1;
-        _exhaustion(lamps, horizontalSwitches, index + 1);
+        if (_exhaustion(lamps, horizontalSwitches, index + 1))
+            return true;
 
         horizontalSwitches[index] = 0;
-        _exhaustion(lamps, horizontalSwitches, index + 1);
+        if (_exhaustion(lamps, horizontalSwitches, index + 1))
+            return true;
         
-        return;
+        return false;
     }
 
     /** 
