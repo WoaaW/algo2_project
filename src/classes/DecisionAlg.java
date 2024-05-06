@@ -5,7 +5,7 @@ public class DecisionAlg {
 
     public static boolean finished = false;
     
-    static boolean exhaustion(ArrayList<Lamp> lamps, int switchesNo){
+    static void exhaustion(ArrayList<Lamp> lamps, int switchesNo){
 
         int index = 0;
         int[] horizontalSwitches = new int[switchesNo];
@@ -20,18 +20,18 @@ public class DecisionAlg {
             System.out.println("No solution found.");
         }
 
-        return true;
+        return;
     }
 
-    static boolean _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
+    static void _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
         if (finished == true) {
-            return true;
+            return;
         }
         if (index == horizontalSwitches.length){
             if (checkLamp(lamps, horizontalSwitches)){ 
                 finished = true;
             }
-            return true;
+            return;
         }
         horizontalSwitches[index] = 1;
         _exhaustion(lamps, horizontalSwitches, index + 1);
@@ -39,7 +39,7 @@ public class DecisionAlg {
         horizontalSwitches[index] = 0;
         _exhaustion(lamps, horizontalSwitches, index + 1);
         
-        return true;
+        return;
     }
 
 

@@ -5,7 +5,7 @@ public class OptimisationAlg {
 
     private static int max = 0;
     
-    static boolean exhaustion(ArrayList<Lamp> lamps, int switchesNo){
+    static void exhaustion(ArrayList<Lamp> lamps, int switchesNo){
 
         int index = 0;
         int[] horizontalSwitches = new int[switchesNo];
@@ -15,17 +15,17 @@ public class OptimisationAlg {
 
         System.out.println("There can be at most " + max + " lamps lit at the same time.");
 
-        return true;
+        return;
     }
 
-    static boolean _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
+    static void _exhaustion(ArrayList<Lamp> lamps, int[] horizontalSwitches, int index){
         if (index == horizontalSwitches.length){
             int loopMax = checkLamp(lamps, horizontalSwitches);
             if (loopMax > max){
                 max = loopMax;
                 System.out.println("New solution found : " + max);
             }
-            return true;
+            return;
         }
         horizontalSwitches[index] = 1;
         _exhaustion(lamps, horizontalSwitches, index + 1);
@@ -33,7 +33,7 @@ public class OptimisationAlg {
         horizontalSwitches[index] = 0;
         _exhaustion(lamps, horizontalSwitches, index + 1);
         
-        return true;
+        return;
     }
 
     private static int checkLamp(ArrayList<Lamp> lamps, int[] horizontalSwitches){
