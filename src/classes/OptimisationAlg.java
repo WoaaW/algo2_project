@@ -61,6 +61,9 @@ public class OptimisationAlg {
 
             if (lampState == false) {
                 lampNbr -= 1;
+                if (lampNbr <= max) { // Optimisation, on gagne 1 minute sur switches7.txt
+                    return lampNbr;
+                }
             }
             lampState = false;
         }
